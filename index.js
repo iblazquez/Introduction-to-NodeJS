@@ -3,6 +3,10 @@ const path = require('path')
 const csvtojson = require('csvtojson')
 
 const convert = (csvFile) => {
+    if (csvFile == null || csvFile == '') 
+        return console.log('Falta el nombre del csv a convertir');
+    if (!fs.existsSync(csvFile))    
+        return console.log('El fichero ',csvFile,' no existe');
     console.log('File to convert ', csvFile);
     let json ='';
     csvtojson().fromFile(csvFile).on('json',(jsonObj)=>{
@@ -19,6 +23,6 @@ const convert = (csvFile) => {
     
 }
 
-convert('customer-data.csv');
+convert(process.argv[2]);
 
 
